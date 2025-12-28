@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Only - Bolsos Creativos Unisex</title>
+    <script src="/_sdk/element_sdk.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        box-sizing: border-box;
+      }
+
+      @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Space Grotesk", sans-serif;
+        overflow-x: hidden;
+      }
+
+      .color-block:hover {
+        transform: scale(1.02);
+        transition: transform 0.3s ease;
+      }
+
+      .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 20px;
+        aspect-ratio: 1;
+      }
+
+      .gallery-item:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease;
+      }
+
+      .nav-link {
+        transition: all 0.3s ease;
+      }
+
+      .nav-link:hover {
+        transform: translateY(-2px);
+      }
+
+      #mobile-menu {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+
+      #mobile-menu.active {
+        transform: translateX(0);
+      }
+    </style>
+    <style>
+      @view-transition {
+        navigation: auto;
+      }
+    </style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  </head>
+  <body class="h-full">
+    <div id="app-wrapper" class="w-full h-full overflow-auto">
+      <!-- Navigation Desktop -->
+      <nav
+        id="desktop-nav"
+        class="fixed top-0 w-full z-50 py-4 px-6"
+        style="background: rgba(27, 0, 130, 0.95); backdrop-filter: blur(10px)"
+      >
+        <div class="container mx-auto flex justify-between items-center">
+          <div class="text-2xl font-bold" style="color: #c3ff00">
+            UPLOAD ONLY
+          </div>
+          <div class="hidden md:flex gap-8">
+            <a
+              href="#hero"
+              class="nav-link text-lg font-semibold"
+              style="color: #ffffff"
+              >Inicio</a
+            >
+            <a
+              href="#gallery"
+              class="nav-link text-lg font-semibold"
+              style="color: #ffffff"
+              >Galería</a
+            >
+            <a
+              href="#about"
+              class="nav-link text-lg font-semibold"
+              style="color: #ffffff"
+              >Quiénes Somos</a
+            >
+            <a
+              href="#mission"
+              class="nav-link text-lg font-semibold"
+              style="color: #ffffff"
+              >Misión</a
+            >
+            <a
+              href="#vision"
+              class="nav-link text-lg font-semibold"
+              style="color: #ffffff"
+              >Visión</a
+            >
+            <a
+              href="#values"
+              class="nav-link text-lg font-semibold"
+              style="color: #ffffff"
+              >Values</a
+            >
+            <a
+              href="#contact"
+              class="nav-link text-lg font-semibold"
+              style="color: #ffffff"
+              >Contacto</a
+            >
+          </div>
+          <!-- Mobile Menu Button -->
+          <button
+            id="mobile-menu-btn"
+            class="md:hidden text-3xl"
+            style="color: #c3ff00"
+          >
+            ☰
+          </button>
+        </div>
+      </nav>
+      <!-- Mobile Menu -->
+      <div
+        id="mobile-menu"
+        class="fixed top-0 left-0 w-full h-full z-40 md:hidden"
+        style="background: #1b0082"
+      >
+        <div class="flex flex-col items-center justify-center h-full gap-8">
+          <button
+            id="close-menu"
+            class="absolute top-6 right-6 text-4xl"
+            style="color: #c3ff00"
+          >
+            ✕
+          </button>
+          <a
+            href="#hero"
+            class="mobile-link text-3xl font-bold"
+            style="color: #ffffff"
+            >Inicio</a
+          >
+          <a
+            href="#gallery"
+            class="mobile-link text-3xl font-bold"
+            style="color: #ffffff"
+            >Galería</a
+          >
+          <a
+            href="#about"
+            class="mobile-link text-3xl font-bold"
+            style="color: #ffffff"
+            >Quiénes Somos</a
+          >
+          <a
+            href="#mission"
+            class="mobile-link text-3xl font-bold"
+            style="color: #ffffff"
+            >Misión</a
+          >
+          <a
+            href="#vision"
+            class="mobile-link text-3xl font-bold"
+            style="color: #ffffff"
+            >Visión</a
+          >
+          <a
+            href="#values"
+            class="mobile-link text-3xl font-bold"
+            style="color: #ffffff"
+            >Values</a
+          >
+          <a
+            href="#contact"
+            class="mobile-link text-3xl font-bold"
+            style="color: #ffffff"
+            >Contacto</a
+          >
+        </div>
+      </div>
+      <!-- Hero Section -->
+      <section
+        id="hero"
+        class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+        style="background: #ff007d"
+      >
+        <div class="container mx-auto px-6 py-20 text-center relative z-10">
+          <div>
+            <h1
+              id="hero-title"
+              class="text-6xl md:text-8xl font-bold mb-6"
+              style="color: #c3ff00"
+            >
+              UPLOAD ONLY
+            </h1>
+            <p
+              id="hero-subtitle"
+              class="text-2xl md:text-3xl mb-8 font-semibold"
+              style="color: #ffffff"
+            >
+              Tu vibe, tu bag. Zero etiquetas. 💯
+            </p>
+            <button
+              id="cta-button"
+              class="text-xl font-bold px-12 py-5 rounded-full transition-all duration-300 hover:scale-105"
+              style="background-color: #ffd300; color: #1b0082"
+            >
+              Explora la colección
+            </button>
+          </div>
+        </div>
+      </section>
+      <!-- Gallery Section -->
+      <section id="gallery" class="py-20" style="background: #ffd300">
+        <div class="container mx-auto px-6">
+          <h2
+            class="text-5xl md:text-6xl font-bold mb-4 text-center"
+            style="color: #1b0082"
+          >
+            La Galería 📸
+          </h2>
+          <p class="text-xl text-center mb-12" style="color: #ff007d">
+            Nuestros diseños más fire del momento
+          </p>
+          <div
+            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto"
+          >
+            <!-- Gallery Item 1 -->
+            <div
+              class="gallery-item"
+              style="background: linear-gradient(135deg, #ff007d, #ff3cb4)"
+            >
+              <div class="flex items-center justify-center h-full">
+                <div class="text-center p-6">
+                  <div class="text-6xl mb-2">💼</div>
+                  <p class="text-white font-bold text-lg">Neon Dreams</p>
+                </div>
+              </div>
+            </div>
+            <!-- Gallery Item 2 -->
+            <div
+              class="gallery-item"
+              style="background: linear-gradient(135deg, #c3ff00, #ffd300)"
+            >
+              <div class="flex items-center justify-center h-full">
+                <div class="text-center p-6">
+                  <div class="text-6xl mb-2">🎒</div>
+                  <p class="font-bold text-lg" style="color: #1b0082">
+                    Cyber Vibes
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- Gallery Item 3 -->
+            <div
+              class="gallery-item"
+              style="background: linear-gradient(135deg, #00e0ff, #1b0082)"
+            >
+              <div class="flex items-center justify-center h-full">
+                <div class="text-center p-6">
+                  <div class="text-6xl mb-2">👜</div>
+                  <p class="text-white font-bold text-lg">Ocean Wave</p>
+                </div>
+              </div>
+            </div>
+            <!-- Gallery Item 4 -->
+            <div
+              class="gallery-item"
+              style="background: linear-gradient(135deg, #ff3cb4, #c3ff00)"
+            >
+              <div class="flex items-center justify-center h-full">
+                <div class="text-center p-6">
+                  <div class="text-6xl mb-2">🎨</div>
+                  <p class="text-white font-bold text-lg">Art Attack</p>
+                </div>
+              </div>
+            </div>
+            <!-- Gallery Item 5 -->
+            <div
+              class="gallery-item"
+              style="background: linear-gradient(135deg, #1b0082, #ff007d)"
+            >
+              <div class="flex items-center justify-center h-full">
+                <div class="text-center p-6">
+                  <div class="text-6xl mb-2">✨</div>
+                  <p class="text-white font-bold text-lg">Purple Rain</p>
+                </div>
+              </div>
+            </div>
+            <!-- Gallery Item 6 -->
+            <div
+              class="gallery-item"
+              style="background: linear-gradient(135deg, #ffd300, #ff007d)"
+            >
+              <div class="flex items-center justify-center h-full">
+                <div class="text-center p-6">
+                  <div class="text-6xl mb-2">🌟</div>
+                  <p class="text-white font-bold text-lg">Gold Rush</p>
+                </div>
+              </div>
+            </div>
+            <!-- Gallery Item 7 -->
+            <div
+              class="gallery-item"
+              style="background: linear-gradient(135deg, #00e0ff, #c3ff00)"
+            >
+              <div class="flex items-center justify-center h-full">
+                <div class="text-center p-6">
+                  <div class="text-6xl mb-2">🚀</div>
+                  <p class="font-bold text-lg" style="color: #1b0082">
+                    Space Odyssey
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- Gallery Item 8 -->
+            <div
+              class="gallery-item"
+              style="background: linear-gradient(135deg, #ff007d, #00e0ff)"
+            >
+              <div class="flex items-center justify-center h-full">
+                <div class="text-center p-6">
+                  <div class="text-6xl mb-2">🔥</div>
+                  <p class="text-white font-bold text-lg">Fire &amp; Ice</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- About Section -->
+      <section id="about" class="py-20" style="background: #ff3cb4">
+        <div class="container mx-auto px-6">
+          <div class="max-w-4xl mx-auto">
+            <h2
+              class="text-5xl md:text-6xl font-bold mb-8 text-center"
+              style="color: #ffffff"
+            >
+              Quiénes Somos 🌟
+            </h2>
+            <div
+              class="text-xl md:text-2xl leading-relaxed mb-8"
+              style="color: #ffffff"
+            >
+              <p class="mb-6">
+                Somos un crew de diseñadores y creatives que decidimos romper el
+                molde. En 2023 nos hartamos de ver bolsos básicos y genéricos
+                que te encasillan en un género o estilo. Así nació Upload Only.
+              </p>
+              <p class="mb-6">
+                No somos una marca tradicional - somos un movimiento. Creemos
+                que tu bag debería ser tan único como tu playlist de Spotify,
+                tan auténtico como tu feed de Instagram sin filtros. Diseñamos
+                cada pieza pensando en gente real, con personalidades reales,
+                que vive en el mundo real (y en el digital también, obvio).
+              </p>
+              <p>
+                Nuestro estudio está en el corazón de la ciudad, pero nuestra
+                onda es global. Trabajamos con materiales sostenibles porque el
+                planeta también necesita amor. Cada bolso es una collab entre
+                nuestro equipo de diseño y la vibra que queremos transmitir. No
+                mass production, no fast fashion - solo piezas que tienen alma.
+              </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6 mt-12">
+              <div
+                class="text-center p-6 rounded-2xl"
+                style="background: rgba(255, 255, 255, 0.2)"
+              >
+                <div class="text-5xl mb-3">🎯</div>
+                <h3 class="text-2xl font-bold mb-2" style="color: #ffd300">
+                  100% Unisex
+                </h3>
+                <p style="color: #ffffff">Diseños sin género</p>
+              </div>
+              <div
+                class="text-center p-6 rounded-2xl"
+                style="background: rgba(255, 255, 255, 0.2)"
+              >
+                <div class="text-5xl mb-3">♻️</div>
+                <h3 class="text-2xl font-bold mb-2" style="color: #ffd300">
+                  Eco-Friendly
+                </h3>
+                <p style="color: #ffffff">Materiales sostenibles</p>
+              </div>
+              <div
+                class="text-center p-6 rounded-2xl"
+                style="background: rgba(255, 255, 255, 0.2)"
+              >
+                <div class="text-5xl mb-3">🎨</div>
+                <h3 class="text-2xl font-bold mb-2" style="color: #ffd300">
+                  Diseño Original
+                </h3>
+                <p style="color: #ffffff">Ediciones limitadas</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Mission Section -->
+      <section id="mission" class="py-20" style="background: #00e0ff">
+        <div class="container mx-auto px-6">
+          <div class="max-w-4xl mx-auto">
+            <h2
+              id="mission-title"
+              class="text-5xl md:text-6xl font-bold mb-8 text-center"
+              style="color: #1b0082"
+            >
+              La Misión ✨
+            </h2>
+            <p
+              id="mission-text"
+              class="text-xl md:text-2xl leading-relaxed text-center"
+              style="color: #1b0082"
+            >
+              Creamos bolsos que son puro statement. No importa tu género, tu
+              look o tu onda - aquí todos cabemos. Cada pieza es un lienzo para
+              que expreses quién eres sin filtros. Real talk: queremos que
+              cargues tus cosas con actitud y que el mundo vea tu personalidad
+              desde lejos. Upload your style, download la libertad.
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- Vision Section -->
+      <section id="vision" class="py-20" style="background: #c3ff00">
+        <div class="container mx-auto px-6">
+          <div class="max-w-4xl mx-auto">
+            <h2
+              id="vision-title"
+              class="text-5xl md:text-6xl font-bold mb-8 text-center"
+              style="color: #ff007d"
+            >
+              La Visión 🚀
+            </h2>
+            <p
+              id="vision-text"
+              class="text-xl md:text-2xl leading-relaxed text-center"
+              style="color: #1b0082"
+            >
+              Queremos ser el go-to de cualquiera que no le tema a destacar.
+              Visualizamos un mundo donde tu bolso no es solo un accesorio, es
+              parte de tu identidad digital y física. Un futuro donde la moda no
+              tiene género ni reglas, solo vibes. Upload Only va a ser ese brand
+              que ves en las calles, en las redes, en todos lados - el símbolo
+              de que estás viviendo tu verdad sin pedir permiso.
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- Values Section -->
+      <section id="values" class="py-20" style="background: #1b0082">
+        <div class="container mx-auto px-6">
+          <h2
+            id="values-title"
+            class="text-5xl md:text-6xl font-bold mb-16 text-center"
+            style="color: #ffd300"
+          >
+            Los Values 💎
+          </h2>
+          <div
+            class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
+          >
+            <!-- Value 1 -->
+            <div
+              class="value-card rounded-3xl p-8 transition-all duration-300 hover:scale-105"
+              style="background-color: #ff007d"
+            >
+              <div class="text-5xl mb-4">🌈</div>
+              <h3 class="text-2xl font-bold mb-4" style="color: #ffffff">
+                No Género
+              </h3>
+              <p class="text-lg" style="color: #ffffff">
+                Acá no hay "de chico" o "de chica". Solo hay bags que te laten o
+                no. Period. Tu estilo es tuyo y punto.
+              </p>
+            </div>
+            <!-- Value 2 -->
+            <div
+              class="value-card rounded-3xl p-8 transition-all duration-300 hover:scale-105"
+              style="background-color: #c3ff00"
+            >
+              <div class="text-5xl mb-4">🤝</div>
+              <h3 class="text-2xl font-bold mb-4" style="color: #1b0082">
+                Inclusión Total
+              </h3>
+              <p class="text-lg" style="color: #1b0082">
+                Todo el mundo es bienvenido. No importa tu historia, tu presente
+                o tu futuro - hay espacio para ti en nuestra comunidad.
+              </p>
+            </div>
+            <!-- Value 3 -->
+            <div
+              class="value-card rounded-3xl p-8 transition-all duration-300 hover:scale-105"
+              style="background-color: #00e0ff"
+            >
+              <div class="text-5xl mb-4">🦋</div>
+              <h3 class="text-2xl font-bold mb-4" style="color: #1b0082">
+                Libre Desarrollo
+              </h3>
+              <p class="text-lg" style="color: #1b0082">
+                Tu personalidad no tiene límites, y nuestros diseños tampoco.
+                Evoluciona, experimenta, cambia - nosotros te acompañamos.
+              </p>
+            </div>
+            <!-- Value 4 -->
+            <div
+              class="value-card rounded-3xl p-8 transition-all duration-300 hover:scale-105"
+              style="background-color: #ffd300"
+            >
+              <div class="text-5xl mb-4">✨</div>
+              <h3 class="text-2xl font-bold mb-4" style="color: #1b0082">
+                Identidad Auténtica
+              </h3>
+              <p class="text-lg" style="color: #1b0082">
+                Sé tú, sin máscaras. Nuestros bolsos son el reflejo de quien
+                eres de verdad, no de quien crees que deberías ser.
+              </p>
+            </div>
+            <!-- Value 5 -->
+            <div
+              class="value-card rounded-3xl p-8 transition-all duration-300 hover:scale-105"
+              style="background-color: #ff3cb4"
+            >
+              <div class="text-5xl mb-4">🎨</div>
+              <h3 class="text-2xl font-bold mb-4" style="color: #ffffff">
+                Expresión Sin Filtro
+              </h3>
+              <p class="text-lg" style="color: #ffffff">
+                Di lo que quieras sin hablar. Cada diseño es un mood, una
+                declaración, un vibe check que grita quién eres.
+              </p>
+            </div>
+            <!-- Value 6 -->
+            <div
+              class="value-card rounded-3xl p-8 transition-all duration-300 hover:scale-105"
+              style="background-color: #00e0ff"
+            >
+              <div class="text-5xl mb-4">🔥</div>
+              <h3 class="text-2xl font-bold mb-4" style="color: #1b0082">
+                Creatividad Ilimitada
+              </h3>
+              <p class="text-lg" style="color: #1b0082">
+                No hay moldes ni copias. Solo ideas locas que se vuelven
+                realidad. Tu imaginación es el único límite (spoiler: no hay
+                límite).
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Contact Section -->
+      <section id="contact" class="py-20" style="background: #ff007d">
+        <div class="container mx-auto px-6">
+          <div class="max-w-3xl mx-auto">
+            <h2
+              class="text-5xl md:text-6xl font-bold mb-8 text-center"
+              style="color: #c3ff00"
+            >
+              Hablemos 💬
+            </h2>
+            <p class="text-xl text-center mb-12" style="color: #ffffff">
+              ¿Tienes preguntas? ¿Quieres colaborar? ¿Solo quieres decirnos
+              hola? Escríbenos, no ghosteamos nunca 👻
+            </p>
+            <form id="contact-form" class="space-y-6">
+              <div>
+                <label
+                  for="name"
+                  class="block text-lg font-semibold mb-2"
+                  style="color: #ffffff"
+                  >Tu Nombre</label
+                >
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  class="w-full px-6 py-4 rounded-full text-lg"
+                  style="
+                    background: #ffffff;
+                    color: #1b0082;
+                    border: 3px solid #c3ff00;
+                  "
+                  placeholder="Cómo te llamas?"
+                />
+              </div>
+              <div>
+                <label
+                  for="email"
+                  class="block text-lg font-semibold mb-2"
+                  style="color: #ffffff"
+                  >Tu Email</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  class="w-full px-6 py-4 rounded-full text-lg"
+                  style="
+                    background: #ffffff;
+                    color: #1b0082;
+                    border: 3px solid #c3ff00;
+                  "
+                  placeholder="tu@email.com"
+                />
+              </div>
+              <div>
+                <label
+                  for="message"
+                  class="block text-lg font-semibold mb-2"
+                  style="color: #ffffff"
+                  >Tu Mensaje</label
+                >
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  rows="6"
+                  class="w-full px-6 py-4 rounded-3xl text-lg"
+                  style="
+                    background: #ffffff;
+                    color: #1b0082;
+                    border: 3px solid #c3ff00;
+                  "
+                  placeholder="Cuéntanos qué tienes en mente..."
+                ></textarea>
+              </div>
+              <div class="text-center">
+                <button
+                  type="submit"
+                  class="text-xl font-bold px-12 py-5 rounded-full transition-all duration-300 hover:scale-105"
+                  style="background-color: #ffd300; color: #1b0082"
+                >
+                  Enviar Mensaje 🚀
+                </button>
+              </div>
+            </form>
+            <div class="mt-12 text-center">
+              <p class="text-lg mb-4" style="color: #ffffff">
+                O encuéntranos en:
+              </p>
+              <div class="flex justify-center gap-8 text-4xl">
+                <a
+                  href="#"
+                  class="hover:scale-110 transition-transform"
+                  style="color: #c3ff00"
+                  >📧</a
+                >
+                <a
+                  href="#"
+                  class="hover:scale-110 transition-transform"
+                  style="color: #c3ff00"
+                  >📱</a
+                >
+                <a
+                  href="#"
+                  class="hover:scale-110 transition-transform"
+                  style="color: #c3ff00"
+                  >💬</a
+                >
+                <a
+                  href="#"
+                  class="hover:scale-110 transition-transform"
+                  style="color: #c3ff00"
+                  >🎥</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Footer -->
+      <footer id="footer" class="py-12 text-center" style="background: #1b0082">
+        <div class="container mx-auto px-6">
+          <p
+            id="footer-text"
+            class="text-xl font-semibold mb-4"
+            style="color: #c3ff00"
+          >
+            Upload Only - Carga tu estilo, descarga la libertad
+          </p>
+          <div class="flex justify-center gap-6 text-3xl mb-6">
+            <span>✨</span> <span>💼</span> <span>🌈</span> <span>🚀</span>
+          </div>
+          <p class="text-sm" style="color: #ffffff">
+            © 2024 Upload Only. All vibes reserved. Made with 💜 for the
+            fearless.
+          </p>
+        </div>
+      </footer>
+    </div>
+    <script>
+      const defaultConfig = {
+        hero_background: "#FF007D",
+        hero_title_color: "#C3FF00",
+        text_color: "#FFFFFF",
+        cta_background: "#FFD300",
+        cta_text_color: "#1B0082",
+        mission_background: "#00E0FF",
+        mission_title_color: "#1B0082",
+        vision_background: "#C3FF00",
+        vision_title_color: "#FF007D",
+        vision_text_color: "#1B0082",
+        values_background: "#1B0082",
+        values_title_color: "#FFD300",
+        footer_background: "#1B0082",
+        font_family: "Space Grotesk",
+        font_size: 16,
+        hero_title: "UPLOAD ONLY",
+        hero_subtitle: "Tu vibe, tu bag. Zero etiquetas. 💯",
+        cta_button: "Explora la colección",
+        mission_title: "La Misión ✨",
+        mission_text:
+          "Creamos bolsos que son puro statement. No importa tu género, tu look o tu onda - aquí todos cabemos. Cada pieza es un lienzo para que expreses quién eres sin filtros. Real talk: queremos que cargues tus cosas con actitud y que el mundo vea tu personalidad desde lejos. Upload your style, download la libertad.",
+        vision_title: "La Visión 🚀",
+        vision_text:
+          "Queremos ser el go-to de cualquiera que no le tema a destacar. Visualizamos un mundo donde tu bolso no es solo un accesorio, es parte de tu identidad digital y física. Un futuro donde la moda no tiene género ni reglas, solo vibes. Upload Only va a ser ese brand que ves en las calles, en las redes, en todos lados - el símbolo de que estás viviendo tu verdad sin pedir permiso.",
+        values_title: "Los Values 💎",
+        footer_text: "Upload Only - Carga tu estilo, descarga la libertad",
+      };
+
+      // Mobile Menu Toggle
+      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const closeMenuBtn = document.getElementById("close-menu");
+      const mobileLinks = document.querySelectorAll(".mobile-link");
+
+      mobileMenuBtn.addEventListener("click", () => {
+        mobileMenu.classList.add("active");
+      });
+
+      closeMenuBtn.addEventListener("click", () => {
+        mobileMenu.classList.remove("active");
+      });
+
+      mobileLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.remove("active");
+        });
+      });
+
+      // Smooth Scroll
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Contact Form
+      const contactForm = document.getElementById("contact-form");
+      contactForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(contactForm);
+        const name = formData.get("name");
+
+        // Show success message
+        const messageDiv = document.createElement("div");
+        messageDiv.className =
+          "mt-6 p-6 rounded-3xl text-center text-xl font-bold";
+        messageDiv.style.backgroundColor = "#C3FF00";
+        messageDiv.style.color = "#1B0082";
+        messageDiv.textContent = `¡Gracias ${name}! Tu mensaje está en camino. Te respondemos pronto 🚀`;
+
+        contactForm.appendChild(messageDiv);
+        contactForm.reset();
+
+        setTimeout(() => {
+          messageDiv.remove();
+        }, 5000);
+      });
+
+      async function onConfigChange(config) {
+        const customFont = config.font_family || defaultConfig.font_family;
+        const baseFontStack = "Arial, sans-serif";
+        const baseSize = config.font_size || defaultConfig.font_size;
+
+        // Apply fonts
+        document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+
+        // Hero section
+        const heroSection = document.getElementById("hero");
+        heroSection.style.background =
+          config.hero_background || defaultConfig.hero_background;
+
+        document.getElementById("hero-title").textContent =
+          config.hero_title || defaultConfig.hero_title;
+        document.getElementById("hero-title").style.fontSize = `${
+          baseSize * 4
+        }px`;
+        document.getElementById("hero-title").style.color =
+          config.hero_title_color || defaultConfig.hero_title_color;
+
+        document.getElementById("hero-subtitle").textContent =
+          config.hero_subtitle || defaultConfig.hero_subtitle;
+        document.getElementById("hero-subtitle").style.fontSize = `${
+          baseSize * 1.5
+        }px`;
+        document.getElementById("hero-subtitle").style.color =
+          config.text_color || defaultConfig.text_color;
+
+        const ctaButton = document.getElementById("cta-button");
+        ctaButton.textContent = config.cta_button || defaultConfig.cta_button;
+        ctaButton.style.fontSize = `${baseSize * 1.25}px`;
+        ctaButton.style.backgroundColor =
+          config.cta_background || defaultConfig.cta_background;
+        ctaButton.style.color =
+          config.cta_text_color || defaultConfig.cta_text_color;
+
+        // Mission section
+        document.getElementById("mission").style.backgroundColor =
+          config.mission_background || defaultConfig.mission_background;
+        document.getElementById("mission-title").textContent =
+          config.mission_title || defaultConfig.mission_title;
+        document.getElementById("mission-title").style.fontSize = `${
+          baseSize * 3
+        }px`;
+        document.getElementById("mission-title").style.color =
+          config.mission_title_color || defaultConfig.mission_title_color;
+        document.getElementById("mission-text").textContent =
+          config.mission_text || defaultConfig.mission_text;
+        document.getElementById("mission-text").style.fontSize = `${
+          baseSize * 1.25
+        }px`;
+        document.getElementById("mission-text").style.color =
+          config.mission_title_color || defaultConfig.mission_title_color;
+
+        // Vision section
+        document.getElementById("vision").style.backgroundColor =
+          config.vision_background || defaultConfig.vision_background;
+        document.getElementById("vision-title").textContent =
+          config.vision_title || defaultConfig.vision_title;
+        document.getElementById("vision-title").style.fontSize = `${
+          baseSize * 3
+        }px`;
+        document.getElementById("vision-title").style.color =
+          config.vision_title_color || defaultConfig.vision_title_color;
+        document.getElementById("vision-text").textContent =
+          config.vision_text || defaultConfig.vision_text;
+        document.getElementById("vision-text").style.fontSize = `${
+          baseSize * 1.25
+        }px`;
+        document.getElementById("vision-text").style.color =
+          config.vision_text_color || defaultConfig.vision_text_color;
+
+        // Values section
+        document.getElementById("values").style.backgroundColor =
+          config.values_background || defaultConfig.values_background;
+        document.getElementById("values-title").textContent =
+          config.values_title || defaultConfig.values_title;
+        document.getElementById("values-title").style.fontSize = `${
+          baseSize * 3
+        }px`;
+        document.getElementById("values-title").style.color =
+          config.values_title_color || defaultConfig.values_title_color;
+
+        // Footer
+        document.getElementById("footer").style.backgroundColor =
+          config.footer_background || defaultConfig.footer_background;
+        document.getElementById("footer-text").textContent =
+          config.footer_text || defaultConfig.footer_text;
+        document.getElementById("footer-text").style.fontSize = `${
+          baseSize * 1.25
+        }px`;
+        document.getElementById("footer-text").style.color =
+          config.hero_title_color || defaultConfig.hero_title_color;
+      }
+
+      function mapToCapabilities(config) {
+        return {
+          recolorables: [
+            {
+              get: () =>
+                config.hero_background || defaultConfig.hero_background,
+              set: (value) => {
+                config.hero_background = value;
+                window.elementSdk.setConfig({ hero_background: value });
+              },
+            },
+            {
+              get: () =>
+                config.mission_background || defaultConfig.mission_background,
+              set: (value) => {
+                config.mission_background = value;
+                window.elementSdk.setConfig({ mission_background: value });
+              },
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              },
+            },
+            {
+              get: () =>
+                config.hero_title_color || defaultConfig.hero_title_color,
+              set: (value) => {
+                config.hero_title_color = value;
+                window.elementSdk.setConfig({ hero_title_color: value });
+              },
+            },
+            {
+              get: () => config.cta_background || defaultConfig.cta_background,
+              set: (value) => {
+                config.cta_background = value;
+                window.elementSdk.setConfig({ cta_background: value });
+              },
+            },
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => {
+              config.font_family = value;
+              window.elementSdk.setConfig({ font_family: value });
+            },
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => {
+              config.font_size = value;
+              window.elementSdk.setConfig({ font_size: value });
+            },
+          },
+        };
+      }
+
+      function mapToEditPanelValues(config) {
+        return new Map([
+          ["hero_title", config.hero_title || defaultConfig.hero_title],
+          [
+            "hero_subtitle",
+            config.hero_subtitle || defaultConfig.hero_subtitle,
+          ],
+          ["cta_button", config.cta_button || defaultConfig.cta_button],
+          [
+            "mission_title",
+            config.mission_title || defaultConfig.mission_title,
+          ],
+          ["mission_text", config.mission_text || defaultConfig.mission_text],
+          ["vision_title", config.vision_title || defaultConfig.vision_title],
+          ["vision_text", config.vision_text || defaultConfig.vision_text],
+          ["values_title", config.values_title || defaultConfig.values_title],
+          ["footer_text", config.footer_text || defaultConfig.footer_text],
+        ]);
+      }
+
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange,
+          mapToCapabilities,
+          mapToEditPanelValues,
+        });
+      }
+    </script>
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement("script");
+            d.innerHTML =
+              "window.__CF$cv$params={r:'9b54f0b822ffeef2',t:'MTc2Njk2NTYyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName("head")[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement("iframe");
+          a.height = 1;
+          a.width = 1;
+          a.style.position = "absolute";
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = "none";
+          a.style.visibility = "hidden";
+          document.body.appendChild(a);
+          if ("loading" !== document.readyState) c();
+          else if (window.addEventListener)
+            document.addEventListener("DOMContentLoaded", c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              "loading" !== document.readyState &&
+                ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
