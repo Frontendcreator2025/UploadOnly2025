@@ -29,6 +29,16 @@
         transition: transform 0.3s ease;
       }
 
+      .info-card {
+        transition: all 0.4s ease;
+        position: relative;
+      }
+
+      .info-card:hover {
+        transform: translateY(-10px) rotate(2deg);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      }
+
       .gallery-item {
         position: relative;
         overflow: hidden;
@@ -43,10 +53,42 @@
 
       .nav-link {
         transition: all 0.3s ease;
+        position: relative;
+        padding-bottom: 4px;
       }
 
       .nav-link:hover {
         transform: translateY(-2px);
+        color: #c3ff00 !important;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #c3ff00, #ff007d, #00e0ff);
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      @keyframes navGlow {
+        0%,
+        100% {
+          box-shadow: 0 0 20px rgba(195, 255, 0, 0.3);
+        }
+        50% {
+          box-shadow: 0 0 30px rgba(255, 0, 125, 0.5);
+        }
+      }
+
+      #desktop-nav {
+        animation: navGlow 3s ease-in-out infinite;
       }
 
       #mobile-menu {
@@ -56,6 +98,137 @@
 
       #mobile-menu.active {
         transform: translateX(0);
+      }
+
+      /* Chatbot Styles */
+      #chatbot-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+      }
+
+      #chatbot-button {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #ff007d, #c3ff00);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        transition: transform 0.3s ease;
+      }
+
+      #chatbot-button:hover {
+        transform: scale(1.1);
+      }
+
+      #chatbot-window {
+        position: absolute;
+        bottom: 80px;
+        right: 0;
+        width: 320px;
+        max-width: 90vw;
+        height: 450px;
+        background: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      #chatbot-window.active {
+        display: flex;
+      }
+
+      #chatbot-header {
+        background: linear-gradient(135deg, #1b0082, #360a9f);
+        color: #ffffff;
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      #chatbot-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .chat-message {
+        max-width: 80%;
+        padding: 10px 14px;
+        border-radius: 18px;
+        animation: slideIn 0.3s ease;
+      }
+
+      .bot-message {
+        background: #f0f0f0;
+        color: #1b0082;
+        align-self: flex-start;
+      }
+
+      .user-message {
+        background: #ff007d;
+        color: #ffffff;
+        align-self: flex-end;
+      }
+
+      #chatbot-input-area {
+        padding: 12px;
+        background: #f5f5f5;
+        display: flex;
+        gap: 8px;
+      }
+
+      #chatbot-input {
+        flex: 1;
+        padding: 10px;
+        border: 2px solid #1b0082;
+        border-radius: 20px;
+        outline: none;
+      }
+
+      #chatbot-send {
+        background: #ff007d;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s ease;
+      }
+
+      #chatbot-send:hover {
+        background: #c3ff00;
+        color: #1b0082;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 640px) {
+        #chatbot-window {
+          width: calc(100vw - 40px);
+          height: 400px;
+        }
       }
     </style>
     <style>
@@ -67,6 +240,47 @@
   </head>
   <body class="h-full">
     <div id="app-wrapper" class="w-full h-full overflow-auto">
+      <!-- Chatbot -->
+      <div id="chatbot-container">
+        <div id="chatbot-window">
+          <div id="chatbot-header">
+            <div>
+              <div style="font-weight: bold; font-size: 18px">
+                Upload Bot 🤖
+              </div>
+              <div style="font-size: 12px; opacity: 0.9">
+                Siempre aquí para ti
+              </div>
+            </div>
+            <button
+              id="chatbot-close"
+              style="
+                background: none;
+                border: none;
+                color: #ffffff;
+                font-size: 24px;
+                cursor: pointer;
+              "
+            >
+              ✕
+            </button>
+          </div>
+          <div id="chatbot-messages">
+            <div class="chat-message bot-message">
+              ¡Hola! Soy Upload Bot. ¿En qué puedo ayudarte hoy?
+            </div>
+          </div>
+          <div id="chatbot-input-area">
+            <input
+              type="text"
+              id="chatbot-input"
+              placeholder="Escribe tu mensaje..."
+            />
+            <button id="chatbot-send">Enviar</button>
+          </div>
+        </div>
+        <div id="chatbot-button">💬</div>
+      </div>
       <!-- Navigation Desktop -->
       <nav
         id="desktop-nav"
@@ -74,8 +288,13 @@
         style="background: rgba(27, 0, 130, 0.95); backdrop-filter: blur(10px)"
       >
         <div class="container mx-auto flex justify-between items-center">
-          <div class="text-2xl font-bold" style="color: #c3ff00">
-            UPLOAD ONLY
+          <div class="flex items-center">
+            <img
+              src="https://raw.githubusercontent.com/Frontendcreator2025/UploadOnly2025/refs/heads/main/logo%20%20bolsos%20.png"
+              alt="Upload Only Logo"
+              class="h-20 md:h-32"
+              style="width: auto"
+            />
           </div>
           <div class="hidden md:flex gap-8">
             <a
@@ -145,6 +364,14 @@
           >
             ✕
           </button>
+          <div class="mb-8">
+            <img
+              src="https://raw.githubusercontent.com/Frontendcreator2025/UploadOnly2025/refs/heads/main/logo%20%20bolsos%20.png"
+              alt="Upload Only Logo"
+              class="h-24"
+              style="width: auto"
+            />
+          </div>
           <a
             href="#hero"
             class="mobile-link text-3xl font-bold"
@@ -195,21 +422,29 @@
         class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
         style="background: #ff007d"
       >
-        <div class="container mx-auto px-6 py-20 text-center relative z-10">
+        <div class="container mx-auto px-6 py-12 text-center relative z-10">
           <div>
+            <div class="flex justify-center mb-3">
+              <img
+                src="https://raw.githubusercontent.com/Frontendcreator2025/UploadOnly2025/refs/heads/main/logo%20%20bolsos%20.png"
+                alt="Upload Only Logo"
+                class="w-full max-w-xl md:max-w-4xl px-6"
+                style="height: auto"
+              />
+            </div>
             <h1
               id="hero-title"
               class="text-6xl md:text-8xl font-bold mb-6"
-              style="color: #c3ff00"
+              style="color: #c3ff00; display: none"
             >
               UPLOAD ONLY
             </h1>
             <p
               id="hero-subtitle"
-              class="text-2xl md:text-3xl mb-8 font-semibold"
+              class="text-2xl md:text-4xl mb-8 font-bold"
               style="color: #ffffff"
             >
-              Tu vibe, tu bag. Zero etiquetas. 💯
+              Tu vibe, tu bag. Zero etiquetas
             </p>
             <button
               id="cta-button"
@@ -222,135 +457,104 @@
         </div>
       </section>
       <!-- Gallery Section -->
-      <section id="gallery" class="py-20" style="background: #ffd300">
+      <section id="gallery" class="py-12" style="background: #360a9f">
         <div class="container mx-auto px-6">
           <h2
-            class="text-5xl md:text-6xl font-bold mb-4 text-center"
-            style="color: #1b0082"
+            class="text-4xl md:text-5xl font-bold mb-3 text-center"
+            style="color: #c3ff00"
           >
-            La Galería 📸
+            Galería
           </h2>
-          <p class="text-xl text-center mb-12" style="color: #ff007d">
+          <p class="text-lg text-center mb-8" style="color: #ffffff">
             Nuestros diseños más fire del momento
           </p>
-          <div
-            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto"
-          >
-            <!-- Gallery Item 1 -->
+          <!-- Image Slider -->
+          <div class="relative max-w-4xl mx-auto">
             <div
-              class="gallery-item"
-              style="background: linear-gradient(135deg, #ff007d, #ff3cb4)"
+              class="overflow-hidden rounded-3xl"
+              style="box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3)"
             >
-              <div class="flex items-center justify-center h-full">
-                <div class="text-center p-6">
-                  <div class="text-6xl mb-2">💼</div>
-                  <p class="text-white font-bold text-lg">Neon Dreams</p>
+              <div
+                id="slider-container"
+                class="flex transition-transform duration-500 ease-in-out"
+              >
+                <!-- Slide 1 -->
+                <div class="min-w-full">
+                  <img
+                    src="https://raw.githubusercontent.com/Frontendcreator2025/UploadOnly2025/refs/heads/main/1.jpg"
+                    alt="Upload Only Bag Design 1"
+                    class="w-full h-auto"
+                    style="display: block"
+                  />
+                </div>
+                <!-- Slide 2 -->
+                <div class="min-w-full">
+                  <img
+                    src="https://raw.githubusercontent.com/Frontendcreator2025/UploadOnly2025/refs/heads/main/2.jpg"
+                    alt="Upload Only Bag Design 2"
+                    class="w-full h-auto"
+                    style="display: block"
+                  />
+                </div>
+                <!-- Slide 3 -->
+                <div class="min-w-full">
+                  <img
+                    src="https://raw.githubusercontent.com/Frontendcreator2025/UploadOnly2025/refs/heads/main/3.jpg"
+                    alt="Upload Only Bag Design 3"
+                    class="w-full h-auto"
+                    style="display: block"
+                  />
                 </div>
               </div>
             </div>
-            <!-- Gallery Item 2 -->
-            <div
-              class="gallery-item"
-              style="background: linear-gradient(135deg, #c3ff00, #ffd300)"
+            <!-- Navigation Buttons -->
+            <button
+              id="prev-btn"
+              class="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 text-4xl md:text-5xl font-bold p-2 md:p-4 rounded-full transition-all duration-300 hover:scale-110"
+              style="background: rgba(255, 211, 0, 0.9); color: #1b0082"
             >
-              <div class="flex items-center justify-center h-full">
-                <div class="text-center p-6">
-                  <div class="text-6xl mb-2">🎒</div>
-                  <p class="font-bold text-lg" style="color: #1b0082">
-                    Cyber Vibes
-                  </p>
-                </div>
-              </div>
-            </div>
-            <!-- Gallery Item 3 -->
-            <div
-              class="gallery-item"
-              style="background: linear-gradient(135deg, #00e0ff, #1b0082)"
+              ‹
+            </button>
+            <button
+              id="next-btn"
+              class="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 text-4xl md:text-5xl font-bold p-2 md:p-4 rounded-full transition-all duration-300 hover:scale-110"
+              style="background: rgba(255, 211, 0, 0.9); color: #1b0082"
             >
-              <div class="flex items-center justify-center h-full">
-                <div class="text-center p-6">
-                  <div class="text-6xl mb-2">👜</div>
-                  <p class="text-white font-bold text-lg">Ocean Wave</p>
-                </div>
-              </div>
-            </div>
-            <!-- Gallery Item 4 -->
-            <div
-              class="gallery-item"
-              style="background: linear-gradient(135deg, #ff3cb4, #c3ff00)"
-            >
-              <div class="flex items-center justify-center h-full">
-                <div class="text-center p-6">
-                  <div class="text-6xl mb-2">🎨</div>
-                  <p class="text-white font-bold text-lg">Art Attack</p>
-                </div>
-              </div>
-            </div>
-            <!-- Gallery Item 5 -->
-            <div
-              class="gallery-item"
-              style="background: linear-gradient(135deg, #1b0082, #ff007d)"
-            >
-              <div class="flex items-center justify-center h-full">
-                <div class="text-center p-6">
-                  <div class="text-6xl mb-2">✨</div>
-                  <p class="text-white font-bold text-lg">Purple Rain</p>
-                </div>
-              </div>
-            </div>
-            <!-- Gallery Item 6 -->
-            <div
-              class="gallery-item"
-              style="background: linear-gradient(135deg, #ffd300, #ff007d)"
-            >
-              <div class="flex items-center justify-center h-full">
-                <div class="text-center p-6">
-                  <div class="text-6xl mb-2">🌟</div>
-                  <p class="text-white font-bold text-lg">Gold Rush</p>
-                </div>
-              </div>
-            </div>
-            <!-- Gallery Item 7 -->
-            <div
-              class="gallery-item"
-              style="background: linear-gradient(135deg, #00e0ff, #c3ff00)"
-            >
-              <div class="flex items-center justify-center h-full">
-                <div class="text-center p-6">
-                  <div class="text-6xl mb-2">🚀</div>
-                  <p class="font-bold text-lg" style="color: #1b0082">
-                    Space Odyssey
-                  </p>
-                </div>
-              </div>
-            </div>
-            <!-- Gallery Item 8 -->
-            <div
-              class="gallery-item"
-              style="background: linear-gradient(135deg, #ff007d, #00e0ff)"
-            >
-              <div class="flex items-center justify-center h-full">
-                <div class="text-center p-6">
-                  <div class="text-6xl mb-2">🔥</div>
-                  <p class="text-white font-bold text-lg">Fire &amp; Ice</p>
-                </div>
-              </div>
+              ›
+            </button>
+            <!-- Dots Indicator -->
+            <div class="flex justify-center gap-3 md:gap-4 mt-6 md:mt-8">
+              <button
+                class="slider-dot w-3 h-3 md:w-4 md:h-4 rounded-full transition-all duration-300"
+                data-slide="0"
+                style="background: #c3ff00"
+              ></button>
+              <button
+                class="slider-dot w-3 h-3 md:w-4 md:h-4 rounded-full transition-all duration-300"
+                data-slide="1"
+                style="background: rgba(195, 255, 0, 0.3)"
+              ></button>
+              <button
+                class="slider-dot w-3 h-3 md:w-4 md:h-4 rounded-full transition-all duration-300"
+                data-slide="2"
+                style="background: rgba(195, 255, 0, 0.3)"
+              ></button>
             </div>
           </div>
         </div>
       </section>
       <!-- About Section -->
-      <section id="about" class="py-20" style="background: #ff3cb4">
+      <section id="about" class="py-12" style="background: #fa0081">
         <div class="container mx-auto px-6">
           <div class="max-w-4xl mx-auto">
             <h2
-              class="text-5xl md:text-6xl font-bold mb-8 text-center"
+              class="text-4xl md:text-5xl font-bold mb-6 text-center"
               style="color: #ffffff"
             >
-              Quiénes Somos 🌟
+              Quiénes Somos
             </h2>
             <div
-              class="text-xl md:text-2xl leading-relaxed mb-8"
+              class="text-lg md:text-xl leading-relaxed mb-6"
               style="color: #ffffff"
             >
               <p class="mb-6">
@@ -373,55 +577,68 @@
                 mass production, no fast fashion - solo piezas que tienen alma.
               </p>
             </div>
-            <div class="grid md:grid-cols-3 gap-6 mt-12">
+            <div class="grid md:grid-cols-3 gap-4 mt-8">
               <div
-                class="text-center p-6 rounded-2xl"
-                style="background: rgba(255, 255, 255, 0.2)"
+                class="info-card text-center p-4 rounded-2xl"
+                style="
+                  background: #360a9f;
+                  box-shadow: 0 10px 30px rgba(54, 10, 159, 0.4);
+                "
               >
-                <div class="text-5xl mb-3">🎯</div>
-                <h3 class="text-2xl font-bold mb-2" style="color: #ffd300">
+                <div class="text-4xl mb-2"></div>
+                <h3 class="text-xl font-bold mb-1" style="color: #c3ff00">
                   100% Unisex
                 </h3>
-                <p style="color: #ffffff">Diseños sin género</p>
+                <p class="text-sm" style="color: #ffffff">Diseños sin género</p>
               </div>
               <div
-                class="text-center p-6 rounded-2xl"
-                style="background: rgba(255, 255, 255, 0.2)"
+                class="info-card text-center p-4 rounded-2xl"
+                style="
+                  background: #ffd300;
+                  box-shadow: 0 10px 30px rgba(255, 211, 0, 0.4);
+                "
               >
-                <div class="text-5xl mb-3">♻️</div>
-                <h3 class="text-2xl font-bold mb-2" style="color: #ffd300">
+                <div class="text-4xl mb-2"></div>
+                <h3 class="text-xl font-bold mb-1" style="color: #1b0082">
                   Eco-Friendly
                 </h3>
-                <p style="color: #ffffff">Materiales sostenibles</p>
+                <p class="text-sm" style="color: #1b0082">
+                  Materiales sostenibles
+                </p>
               </div>
               <div
-                class="text-center p-6 rounded-2xl"
-                style="background: rgba(255, 255, 255, 0.2)"
+                class="info-card text-center p-4 rounded-2xl"
+                style="
+                  background: #89ea00;
+                  box-shadow: 0 10px 30px rgba(137, 234, 0, 0.4);
+                "
               >
-                <div class="text-5xl mb-3">🎨</div>
-                <h3 class="text-2xl font-bold mb-2" style="color: #ffd300">
+                <div class="text-4xl mb-2"></div>
+                <h3 class="text-xl font-bold mb-1" style="color: #1b0082">
                   Diseño Original
                 </h3>
-                <p style="color: #ffffff">Ediciones limitadas</p>
+                <p class="text-sm" style="color: #1b0082">
+                  Ediciones limitadas
+                </p>
               </div>
             </div>
           </div>
         </div>
       </section>
       <!-- Mission Section -->
-      <section id="mission" class="py-20" style="background: #00e0ff">
+      <section id="mission" class="py-12" style="background: #00e0ff">
         <div class="container mx-auto px-6">
           <div class="max-w-4xl mx-auto">
             <h2
               id="mission-title"
-              class="text-5xl md:text-6xl font-bold mb-8 text-center"
+              class="text-4xl md:text-5xl font-bold mb-6 text-center"
               style="color: #1b0082"
             >
-              La Misión ✨
+              Misión
             </h2>
             <p
               id="mission-text"
-              class="text-xl md:text-2xl leading-relaxed text-center"
+              class="text-lg md:text-xl leading-relaxed text-center"
               style="color: #1b0082"
             >
               Creamos bolsos que son puro statement. No importa tu género, tu
@@ -434,19 +651,19 @@
         </div>
       </section>
       <!-- Vision Section -->
-      <section id="vision" class="py-20" style="background: #c3ff00">
+      <section id="vision" class="py-12" style="background: #c3ff00">
         <div class="container mx-auto px-6">
           <div class="max-w-4xl mx-auto">
             <h2
               id="vision-title"
-              class="text-5xl md:text-6xl font-bold mb-8 text-center"
+              class="text-4xl md:text-5xl font-bold mb-6 text-center"
               style="color: #ff007d"
             >
-              La Visión 🚀
+              Visión
             </h2>
             <p
               id="vision-text"
-              class="text-xl md:text-2xl leading-relaxed text-center"
+              class="text-lg md:text-xl leading-relaxed text-center"
               style="color: #1b0082"
             >
               Queremos ser el go-to de cualquiera que no le tema a destacar.
@@ -460,98 +677,98 @@
         </div>
       </section>
       <!-- Values Section -->
-      <section id="values" class="py-20" style="background: #1b0082">
+      <section id="values" class="py-12" style="background: #1b0082">
         <div class="container mx-auto px-6">
           <h2
             id="values-title"
-            class="text-5xl md:text-6xl font-bold mb-16 text-center"
+            class="text-4xl md:text-5xl font-bold mb-8 text-center"
             style="color: #ffd300"
           >
-            Los Values 💎
+            Valores
           </h2>
           <div
-            class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
+            class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
           >
             <!-- Value 1 -->
             <div
-              class="value-card rounded-3xl p-8 transition-all duration-300 hover:scale-105"
+              class="value-card rounded-3xl p-6 transition-all duration-300 hover:scale-105"
               style="background-color: #ff007d"
             >
-              <div class="text-5xl mb-4">🌈</div>
-              <h3 class="text-2xl font-bold mb-4" style="color: #ffffff">
+              <div class="text-4xl mb-3"></div>
+              <h3 class="text-xl font-bold mb-3" style="color: #ffffff">
                 No Género
               </h3>
-              <p class="text-lg" style="color: #ffffff">
-                Acá no hay "de chico" o "de chica". Solo hay bags que te laten o
+              <p class="text-base" style="color: #ffffff">
+                No existe "de chico" o "de chica". Solo hay bags que te laten o
                 no. Period. Tu estilo es tuyo y punto.
               </p>
             </div>
             <!-- Value 2 -->
             <div
-              class="value-card rounded-3xl p-8 transition-all duration-300 hover:scale-105"
+              class="value-card rounded-3xl p-6 transition-all duration-300 hover:scale-105"
               style="background-color: #c3ff00"
             >
-              <div class="text-5xl mb-4">🤝</div>
-              <h3 class="text-2xl font-bold mb-4" style="color: #1b0082">
+              <div class="text-4xl mb-3"></div>
+              <h3 class="text-xl font-bold mb-3" style="color: #1b0082">
                 Inclusión Total
               </h3>
-              <p class="text-lg" style="color: #1b0082">
+              <p class="text-base" style="color: #1b0082">
                 Todo el mundo es bienvenido. No importa tu historia, tu presente
                 o tu futuro - hay espacio para ti en nuestra comunidad.
               </p>
             </div>
             <!-- Value 3 -->
             <div
-              class="value-card rounded-3xl p-8 transition-all duration-300 hover:scale-105"
+              class="value-card rounded-3xl p-6 transition-all duration-300 hover:scale-105"
               style="background-color: #00e0ff"
             >
-              <div class="text-5xl mb-4">🦋</div>
-              <h3 class="text-2xl font-bold mb-4" style="color: #1b0082">
+              <div class="text-4xl mb-3"></div>
+              <h3 class="text-xl font-bold mb-3" style="color: #1b0082">
                 Libre Desarrollo
               </h3>
-              <p class="text-lg" style="color: #1b0082">
+              <p class="text-base" style="color: #1b0082">
                 Tu personalidad no tiene límites, y nuestros diseños tampoco.
                 Evoluciona, experimenta, cambia - nosotros te acompañamos.
               </p>
             </div>
             <!-- Value 4 -->
             <div
-              class="value-card rounded-3xl p-8 transition-all duration-300 hover:scale-105"
+              class="value-card rounded-3xl p-6 transition-all duration-300 hover:scale-105"
               style="background-color: #ffd300"
             >
-              <div class="text-5xl mb-4">✨</div>
-              <h3 class="text-2xl font-bold mb-4" style="color: #1b0082">
+              <div class="text-4xl mb-3"></div>
+              <h3 class="text-xl font-bold mb-3" style="color: #1b0082">
                 Identidad Auténtica
               </h3>
-              <p class="text-lg" style="color: #1b0082">
+              <p class="text-base" style="color: #1b0082">
                 Sé tú, sin máscaras. Nuestros bolsos son el reflejo de quien
                 eres de verdad, no de quien crees que deberías ser.
               </p>
             </div>
             <!-- Value 5 -->
             <div
-              class="value-card rounded-3xl p-8 transition-all duration-300 hover:scale-105"
+              class="value-card rounded-3xl p-6 transition-all duration-300 hover:scale-105"
               style="background-color: #ff3cb4"
             >
-              <div class="text-5xl mb-4">🎨</div>
-              <h3 class="text-2xl font-bold mb-4" style="color: #ffffff">
+              <div class="text-4xl mb-3"></div>
+              <h3 class="text-xl font-bold mb-3" style="color: #ffffff">
                 Expresión Sin Filtro
               </h3>
-              <p class="text-lg" style="color: #ffffff">
+              <p class="text-base" style="color: #ffffff">
                 Di lo que quieras sin hablar. Cada diseño es un mood, una
                 declaración, un vibe check que grita quién eres.
               </p>
             </div>
             <!-- Value 6 -->
             <div
-              class="value-card rounded-3xl p-8 transition-all duration-300 hover:scale-105"
-              style="background-color: #00e0ff"
+              class="value-card rounded-3xl p-6 transition-all duration-300 hover:scale-105"
+              style="background-color: #c3ff00"
             >
-              <div class="text-5xl mb-4">🔥</div>
-              <h3 class="text-2xl font-bold mb-4" style="color: #1b0082">
+              <div class="text-4xl mb-3"></div>
+              <h3 class="text-xl font-bold mb-3" style="color: #1b0082">
                 Creatividad Ilimitada
               </h3>
-              <p class="text-lg" style="color: #1b0082">
+              <p class="text-base" style="color: #1b0082">
                 No hay moldes ni copias. Solo ideas locas que se vuelven
                 realidad. Tu imaginación es el único límite (spoiler: no hay
                 límite).
@@ -561,25 +778,28 @@
         </div>
       </section>
       <!-- Contact Section -->
-      <section id="contact" class="py-20" style="background: #ff007d">
+      <section id="contact" class="py-12" style="background: #dbff00">
         <div class="container mx-auto px-6">
           <div class="max-w-3xl mx-auto">
             <h2
-              class="text-5xl md:text-6xl font-bold mb-8 text-center"
-              style="color: #c3ff00"
+              class="text-4xl md:text-5xl font-bold mb-6 text-center"
+              style="color: #1b0082"
             >
-              Hablemos 💬
+              Hablemos
             </h2>
-            <p class="text-xl text-center mb-12" style="color: #ffffff">
+            <p
+              class="text-lg text-center mb-8 font-bold"
+              style="color: #ff007d"
+            >
               ¿Tienes preguntas? ¿Quieres colaborar? ¿Solo quieres decirnos
-              hola? Escríbenos, no ghosteamos nunca 👻
+              hola? Escríbenos, no ghosteamos nunca
             </p>
             <form id="contact-form" class="space-y-6">
               <div>
                 <label
                   for="name"
                   class="block text-lg font-semibold mb-2"
-                  style="color: #ffffff"
+                  style="color: #1b0082"
                   >Tu Nombre</label
                 >
                 <input
@@ -591,7 +811,7 @@
                   style="
                     background: #ffffff;
                     color: #1b0082;
-                    border: 3px solid #c3ff00;
+                    border: 3px solid #ff007d;
                   "
                   placeholder="Cómo te llamas?"
                 />
@@ -600,7 +820,7 @@
                 <label
                   for="email"
                   class="block text-lg font-semibold mb-2"
-                  style="color: #ffffff"
+                  style="color: #1b0082"
                   >Tu Email</label
                 >
                 <input
@@ -612,16 +832,16 @@
                   style="
                     background: #ffffff;
                     color: #1b0082;
-                    border: 3px solid #c3ff00;
+                    border: 3px solid #ff007d;
                   "
-                  placeholder="tu@email.com"
+                  placeholder="indigolilibarcena@uploadonly.com"
                 />
               </div>
               <div>
                 <label
                   for="message"
                   class="block text-lg font-semibold mb-2"
-                  style="color: #ffffff"
+                  style="color: #1b0082"
                   >Tu Mensaje</label
                 >
                 <textarea
@@ -633,7 +853,7 @@
                   style="
                     background: #ffffff;
                     color: #1b0082;
-                    border: 3px solid #c3ff00;
+                    border: 3px solid #ff007d;
                   "
                   placeholder="Cuéntanos qué tienes en mente..."
                 ></textarea>
@@ -642,63 +862,200 @@
                 <button
                   type="submit"
                   class="text-xl font-bold px-12 py-5 rounded-full transition-all duration-300 hover:scale-105"
-                  style="background-color: #ffd300; color: #1b0082"
+                  style="background-color: #ff007d; color: #ffffff"
                 >
                   Enviar Mensaje 🚀
                 </button>
               </div>
             </form>
-            <div class="mt-12 text-center">
-              <p class="text-lg mb-4" style="color: #ffffff">
-                O encuéntranos en:
-              </p>
-              <div class="flex justify-center gap-8 text-4xl">
-                <a
-                  href="#"
-                  class="hover:scale-110 transition-transform"
-                  style="color: #c3ff00"
-                  >📧</a
-                >
-                <a
-                  href="#"
-                  class="hover:scale-110 transition-transform"
-                  style="color: #c3ff00"
-                  >📱</a
-                >
-                <a
-                  href="#"
-                  class="hover:scale-110 transition-transform"
-                  style="color: #c3ff00"
-                  >💬</a
-                >
-                <a
-                  href="#"
-                  class="hover:scale-110 transition-transform"
-                  style="color: #c3ff00"
-                  >🎥</a
-                >
-              </div>
-            </div>
           </div>
         </div>
       </section>
       <!-- Footer -->
-      <footer id="footer" class="py-12 text-center" style="background: #1b0082">
-        <div class="container mx-auto px-6">
-          <p
-            id="footer-text"
-            class="text-xl font-semibold mb-4"
-            style="color: #c3ff00"
-          >
-            Upload Only - Carga tu estilo, descarga la libertad
-          </p>
-          <div class="flex justify-center gap-6 text-3xl mb-6">
-            <span>✨</span> <span>💼</span> <span>🌈</span> <span>🚀</span>
+      <footer id="footer" class="py-4" style="background: #1b0082">
+        <div class="container mx-auto px-4">
+          <!-- Logo Grande -->
+          <div class="flex justify-center mb-2">
+            <img
+              src="https://raw.githubusercontent.com/Frontendcreator2025/UploadOnly2025/refs/heads/main/logo%20%20bolsos%20.png"
+              alt=""
+              class="h-20 md:h-32"
+              style="width: auto"
+            />
           </div>
-          <p class="text-sm" style="color: #ffffff">
-            © 2024 Upload Only. All vibes reserved. Made with 💜 for the
-            fearless.
-          </p>
+          <!-- Rectángulo Principal con Toda la Info -->
+          <div
+            class="max-w-6xl mx-auto mb-3 rounded-2xl p-4 md:p-6"
+            style="background: #ffed00"
+          >
+            <!-- Tagline -->
+            <p
+              id="footer-text"
+              class="text-lg md:text-2xl font-bold mb-4 text-center"
+              style="color: #7b00ff"
+            >
+              Upload Only - Carga tu estilo, descarga la libertad
+            </p>
+            <!-- Grid de Información -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+              <!-- Contacto -->
+              <div class="text-center md:text-left">
+                <h3
+                  class="text-base md:text-lg font-bold mb-2"
+                  style="color: #ff007d"
+                >
+                  Contacto
+                </h3>
+                <div
+                  class="space-y-1 text-xs md:text-sm"
+                  style="color: #1b0082"
+                >
+                  <p>
+                    <span class="font-semibold">Email:</span> hola@uploadonly.mx
+                  </p>
+                  <p>
+                    <span class="font-semibold">Web:</span> www.uploadonly.mx
+                  </p>
+                  <p>
+                    <span class="font-semibold">Tel 1:</span> +52 55 1234 5678
+                  </p>
+                  <p>
+                    <span class="font-semibold">Tel 2:</span> +52 55 8765 4321
+                  </p>
+                </div>
+              </div>
+              <!-- Ubicación -->
+              <div class="text-center">
+                <h3
+                  class="text-base md:text-lg font-bold mb-2"
+                  style="color: #ff007d"
+                >
+                  Ubicación
+                </h3>
+                <div
+                  class="space-y-1 text-xs md:text-sm"
+                  style="color: #1b0082"
+                >
+                  <p class="font-semibold">Tolrecas 166</p>
+                  <p>San Pedro de los Pinos</p>
+                  <p>01180, Ciudad de México</p>
+                </div>
+              </div>
+              <!-- Síguenos -->
+              <div class="text-center md:text-right">
+                <h3
+                  class="text-base md:text-lg font-bold mb-2"
+                  style="color: #ff007d"
+                >
+                  Síguenos
+                </h3>
+                <div
+                  class="flex flex-wrap justify-center md:justify-end gap-2 text-xs md:text-sm"
+                  style="color: #1b0082"
+                >
+                  <div class="flex items-center gap-1">
+                    <svg
+                      width="14"
+                      height="14"
+                      viewbox="0 0 24 24"
+                      fill="none"
+                      stroke="#1B0082"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <rect
+                        x="2"
+                        y="2"
+                        width="20"
+                        height="20"
+                        rx="5"
+                        ry="5"
+                      ></rect>
+                      <path
+                        d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                      />
+                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                    <p>Instagram</p>
+                  </div>
+                  <span>•</span>
+                  <div class="flex items-center gap-1">
+                    <svg
+                      width="14"
+                      height="14"
+                      viewbox="0 0 24 24"
+                      fill="none"
+                      stroke="#1B0082"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+                    </svg>
+                    <p>TikTok</p>
+                  </div>
+                  <span>•</span>
+                  <div class="flex items-center gap-1">
+                    <svg width="14" height="14" viewbox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="7" r="5" fill="#1B0082" />
+                      <path
+                        d="M12 12 L11 22"
+                        stroke="#1B0082"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                      />
+                      <circle cx="12" cy="4.5" r="1" fill="#FFFFFF" />
+                    </svg>
+                    <p>Pinterest</p>
+                  </div>
+                  <span>•</span>
+                  <div class="flex items-center gap-1">
+                    <svg
+                      width="14"
+                      height="14"
+                      viewbox="0 0 24 24"
+                      fill="none"
+                      stroke="#1B0082"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                      />
+                    </svg>
+                    <p>Facebook</p>
+                  </div>
+                  <span>•</span>
+                  <div class="flex items-center gap-1">
+                    <svg
+                      width="14"
+                      height="14"
+                      viewbox="0 0 24 24"
+                      fill="none"
+                      stroke="#1B0082"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                      />
+                    </svg>
+                    <p>GitHub</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Copyright -->
+          <div class="text-center">
+            <p class="text-xs md:text-sm" style="color: #ffffff">
+              © 2024 Upload Only. All vibes reserved. Made with love by Clancy
+              Pink Punk y Delulu Future Dev.
+            </p>
+          </div>
         </div>
       </footer>
     </div>
@@ -752,6 +1109,52 @@
         });
       });
 
+      // Gallery Slider
+      let currentSlide = 0;
+      const totalSlides = 3;
+      const sliderContainer = document.getElementById("slider-container");
+      const prevBtn = document.getElementById("prev-btn");
+      const nextBtn = document.getElementById("next-btn");
+      const dots = document.querySelectorAll(".slider-dot");
+
+      function updateSlider() {
+        sliderContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+        // Update dots
+        dots.forEach((dot, index) => {
+          if (index === currentSlide) {
+            dot.style.background = "#C3FF00";
+            dot.style.transform = "scale(1.3)";
+          } else {
+            dot.style.background = "rgba(195, 255, 0, 0.3)";
+            dot.style.transform = "scale(1)";
+          }
+        });
+      }
+
+      prevBtn.addEventListener("click", () => {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateSlider();
+      });
+
+      nextBtn.addEventListener("click", () => {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateSlider();
+      });
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+          currentSlide = index;
+          updateSlider();
+        });
+      });
+
+      // Auto-slide every 5 seconds
+      setInterval(() => {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateSlider();
+      }, 5000);
+
       // Smooth Scroll
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener("click", function (e) {
@@ -778,8 +1181,8 @@
         const messageDiv = document.createElement("div");
         messageDiv.className =
           "mt-6 p-6 rounded-3xl text-center text-xl font-bold";
-        messageDiv.style.backgroundColor = "#C3FF00";
-        messageDiv.style.color = "#1B0082";
+        messageDiv.style.backgroundColor = "#FF007D";
+        messageDiv.style.color = "#FFFFFF";
         messageDiv.textContent = `¡Gracias ${name}! Tu mensaje está en camino. Te respondemos pronto 🚀`;
 
         contactForm.appendChild(messageDiv);
@@ -788,6 +1191,111 @@
         setTimeout(() => {
           messageDiv.remove();
         }, 5000);
+      });
+
+      // Chatbot Functionality
+      const chatbotButton = document.getElementById("chatbot-button");
+      const chatbotWindow = document.getElementById("chatbot-window");
+      const chatbotClose = document.getElementById("chatbot-close");
+      const chatbotInput = document.getElementById("chatbot-input");
+      const chatbotSend = document.getElementById("chatbot-send");
+      const chatbotMessages = document.getElementById("chatbot-messages");
+
+      const botResponses = {
+        hola: "¡Hola! 👋 ��Cómo puedo ayudarte con nuestros bolsos Upload Only?",
+        precio:
+          "Nuestros bolsos exclusivos van desde $200 MXN hasta $1,000 MXN dependiendo del diseño. ¿Te interesa alguno en particular? 💰",
+        pago: "Aceptamos transferencias bancarias y tarjetas de crédito (Visa y Mastercard). No aceptamos American Express 💳",
+        transferencia:
+          "Sí, aceptamos pagos por transferencia bancaria. También tarjetas Visa y Mastercard 💳",
+        tarjeta:
+          "Aceptamos Visa y Mastercard. Lamentablemente no aceptamos American Express 💳",
+        envio:
+          "Hacemos envíos a toda la República Mexicana. Envío gratis en compras mayores a $500 MXN 📦",
+        horario:
+          "Estamos disponibles de Lunes a Viernes de 9:00 AM a 6:00 PM (hora CDMX) 🕐",
+        direccion:
+          "Nuestra tienda está en Tolrecas 166, San Pedro de los Pinos, 01180, CDMX. ¡Ven a visitarnos! 📍",
+        tienda:
+          "Estamos en Tolrecas 166, San Pedro de los Pinos, 01180, CDMX 📍",
+        ubicacion:
+          "Nos encuentras en Tolrecas 166, San Pedro de los Pinos, 01180, CDMX 📍",
+        telefono:
+          "Puedes llamarnos al +52 55 1234 5678 o al +52 55 8765 4321 �����",
+        email: "Escríbenos a hola@uploadonly.mx y te respondemos rapidísimo 📧",
+        correo: "Nuestro email es hola@uploadonly.mx 📧",
+        web: "Visita nuestro sitio web: www.uploadonly.mx 🌐",
+        sitio: "Encuentra todo en www.uploadonly.mx 🌐",
+        materiales:
+          "Usamos materiales 100% sostenibles y veganos. Cuidamos el planeta mientras te ves increíble ♻️",
+        colores:
+          "Tenemos una amplia gama de colores vibrantes. Cada bolso es único y expresa tu personalidad 🌈",
+        unisex:
+          "¡Todos nuestros diseños son unisex! Sin etiquetas, solo estilo puro 🎯",
+        exclusivo:
+          "¡Así es! Nuestros diseños son exclusivos y únicos. Ediciones limitadas que no encontrarás en otro lugar 🎨",
+        diseño:
+          "Cada uno de nuestros bolsos tiene un diseño exclusivo y original. Son piezas únicas 🎨",
+        personalizar:
+          "Ofrecemos personalización en algunos modelos. Contáctanos para más detalles 🎨",
+        garantia:
+          "Todos nuestros productos tienen garantía de 6 meses por defectos de fabricación ✨",
+        contacto:
+          "Email: hola@uploadonly.mx | Tel: +52 55 1234 5678 | Web: www.uploadonly.mx 📞",
+        redes:
+          "Síguenos en Instagram, TikTok, Pinterest, Facebook y GitHub como @uploadonly 📱",
+        default:
+          "Interesante pregunta 🤔 Contáctanos en hola@uploadonly.mx o llámanos al +52 55 1234 5678",
+      };
+
+      chatbotButton.addEventListener("click", () => {
+        chatbotWindow.classList.add("active");
+      });
+
+      chatbotClose.addEventListener("click", () => {
+        chatbotWindow.classList.remove("active");
+      });
+
+      function addMessage(text, isUser = false) {
+        const messageDiv = document.createElement("div");
+        messageDiv.className = `chat-message ${
+          isUser ? "user-message" : "bot-message"
+        }`;
+        messageDiv.textContent = text;
+        chatbotMessages.appendChild(messageDiv);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+      }
+
+      function getBotResponse(userMessage) {
+        const message = userMessage.toLowerCase();
+
+        for (const [keyword, response] of Object.entries(botResponses)) {
+          if (message.includes(keyword)) {
+            return response;
+          }
+        }
+
+        return botResponses.default;
+      }
+
+      function sendMessage() {
+        const message = chatbotInput.value.trim();
+        if (!message) return;
+
+        addMessage(message, true);
+        chatbotInput.value = "";
+
+        setTimeout(() => {
+          const response = getBotResponse(message);
+          addMessage(response, false);
+        }, 500);
+      }
+
+      chatbotSend.addEventListener("click", sendMessage);
+      chatbotInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          sendMessage();
+        }
       });
 
       async function onConfigChange(config) {
@@ -982,7 +1490,7 @@
           if (b) {
             var d = b.createElement("script");
             d.innerHTML =
-              "window.__CF$cv$params={r:'9b54f0b822ffeef2',t:'MTc2Njk2NTYyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+              "window.__CF$cv$params={r:'9b5667bb77f3eef2',t:'MTc2Njk4MDk4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
             b.getElementsByTagName("head")[0].appendChild(d);
           }
         }
